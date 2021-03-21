@@ -1,7 +1,7 @@
 \documentclass[11pt]{charter}
 
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Red para optimizacion de procesos industriales} 
+\titulo{Red para optimización de procesos industriales} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -84,7 +84,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de un sistema de control de temperatura de un calefón, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de una red de nodos, cada uno con una función especifica, para reducir los tiempos muertos y mejorar el flujo de información dentro de una industria, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -136,7 +136,7 @@ El objetivo del proyecto es mejorar el control de stock, obtener métricas mas p
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
+Cliente       & \clientename      &\empclientename	& -       	\\ \hline
 Responsable   & \authorname       & Industrias Meghinasso S.A. 	& Ingeniero de Desarrollo 	\\ \hline
 Colaboradores & Matias Meghinasso & Industrias Meghinasso S.A. 	&  \\ \hline
 Orientador    & \supname	      & \pertesupname 	& Director	Trabajo final \\ \hline
@@ -167,7 +167,7 @@ El presente proyecto incluye:
 
 El presente proyecto no incluye:
 \begin{itemize}
-    \item Desarrollo de los PCB finales. Se utilizaran las placas de desarrollo a elegir.
+    \item Desarrollo de los PCB finales. Se utilizarán las placas de desarrollo a elegir.
 \end{itemize}
 
 
@@ -187,8 +187,8 @@ Para el desarrollo del presente proyecto se supone que:
 \begin{enumerate}
     \item Requerimientos generales:
     \begin{enumerate}
-        \item Debe tener comunicación inalámbrica.
         \item Debe poder utilizarse en un ambiente industrial.
+        \item Debe tener comunicación inalámbrica.
         \item Tiene que contemplar la posibilidad de agregar mas tipos de nodos que los previstos.
     \end{enumerate}
     \item Requerimientos del servidor:
@@ -198,48 +198,27 @@ Para el desarrollo del presente proyecto se supone que:
         \item Debe tener una interfase para poder configurarlo.
     \end{enumerate}
     \item Requerimiento de los nodos comunes:
-    \begin{itemize}
+    \begin{enumerate}
         \item Deben tener entradas para poder leer las alarmas y las alertas de las maquinas.
-    \end{itemize}
+    \end{enumerate}
     \item Requerimientos de los nodos cnc:
-    \begin{itemize}
+    \begin{enumerate}
+        \item Tienen que detectar señales de alarma y fin de ciclo.
         \item Deben poder subir y bajar archivos mediante protocolo  RS-232.
-    \end{itemize}
+    \end{enumerate}
+    \item Nodos de control de stock:
+    \begin{enumerate}
+        \item Tienen que medir la altura de piezas de los tachos. 
+        \item Tienen que mandar alertas cuando la altura sea menor a la configurada.
+    \end{enumerate}
+    \item Nodo para el personal:
+    \begin{enumerate}
+        \item Debe poder recibir alertas.
+        \item Debe poder indicar que genero la alerta.
+        \item Debe estar alimentado por una batería recargable.
+    \end{enumerate}
 \end{enumerate}
 
-\begin{consigna}{red}
-Los requerimientos deben numerarse y de ser posible agruparlos por afinidad:
-
-\begin{enumerate}
-\item Grupo de requerimientos asociados con...
-	\begin{enumerate}
-	\item Requerimiento 1
-	\item Requerimiento 2
-	\item Requerimiento 3 (prioridad menor)
-	\end{enumerate}
-\item Grupo de requerimientos asociados con...
-	\begin{enumerate}
-	\item Requerimiento 1
-	\item Requerimiento 2 (prioridad menor)
-	\end{enumerate}
-\end{enumerate}
-
-Leyendo los requerimientos se debe poder interpretar cómo será el proyecto y su funcionalidad.
-
-De ser posible indicar cómo se obtuvieron cada uno de los requerimientos 
-
-Indicar claramente cuál es la prioridad entre los distintos requerimientos. 
-
-No olvidarse de que los requerimientos incluyen a las regulaciones y normas vigentes!!!
-
-Y al escribirlos seguir las siguientes reglas:
-\begin{itemize}
-\item Ser breve y conciso (nadie lee cosas largas). 
-\item Ser específico: no dejar lugar a confusiones.
-\item Expresar los requerimientos en términos que sean cuantificables y medibles.
-\end{itemize}
-
-\end{consigna}
 
 \section{Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
@@ -251,21 +230,44 @@ Descripción: En esta sección se deben incluir las historias de usuarios y su p
 \section{5. Entregables principales del proyecto}
 \label{sec:entregables}
 
-\begin{consigna}{red}
-Cosas como: 
 \begin{itemize}
-\item Manual de uso
-\item Diagrama esquemático
-\item Código fuente
-\item Diagrama de instalación
-\item Informe final
-
+    \item El servidor funcionando
+    \item Un nodo de cada tipo mencionado funcionando.
+    \item Manual de uso
+    \item Código fuente
+    \item Informe final
 \end{itemize}
 
-\end{consigna}
 
 \section{6. Desglose del trabajo en tareas}
 \label{sec:wbs}
+
+\begin{enumerate}
+    \item Análisis del proyecto
+    \begin{enumerate}
+        \item Definir el alcance del proyecto
+        \item Planificación
+        \item Búsqueda de información de comunicaciones inalámbricas en ambientes industriales.
+    \end{enumerate}
+    \item Definiciones generales del proyecto
+    \begin{enumerate}
+        \item Definir la arquitectura de la red.
+        \item Definir el protocolo de comunicación.
+        \item Definir la arquitectura de la interfaz de usuario.
+    \end{enumerate}
+    \item Diseño y armado del hardware
+    \begin{enumerate}
+        \item Servidor.
+        \begin{enumerate}
+            \item 
+        \end{enumerate}
+        \item Armado del nodo común.
+        \item Armado del nodo CNC.
+        \item Armado del nodo de stock.
+        \item Armado del nodo para el personal.
+    \end{enumerate}
+    \item 
+\end{enumerate}
 
 \begin{consigna}{red}
 Se recomienda mostrar el WBS mediante una lista indexada:
