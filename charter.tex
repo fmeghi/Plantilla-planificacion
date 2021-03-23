@@ -21,8 +21,8 @@
 \pertenenciaCoDirector{}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{-}
-\empresaCliente{Industrias Meghinasso S.A.}
+\cliente{Ricardo Meghinasso }
+\empresaCliente{Industrias Meghinasso S.A. }
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
@@ -63,11 +63,10 @@
 \rowcolor[HTML]{C0C0C0} 
 Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios realizados} & Fecha      \\ \hline
 1.0      & Creación del documento                                          & 2/03/2021 \\ \hline
-1.1      & Se completo hasta el punto 4 inclusive & 15/03/2021 \\ \hline
-1.2      & Otro ejemplo \newline
-		   Con texto partido \newline
-		   En varias líneas \newline
-		   A propósito                                                     & dd/mm/aaaa \\ \hline
+1.1      & Se completó hasta el punto 5 inclusive & 15/03/2021 \\ \hline
+1.2      & Se corrigió la descripción técnica\newline
+           Se terminó el punto 6\newline
+           Se agregaron historias de usuario & 23/03/2021 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -84,7 +83,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de una red de nodos, cada uno con una función especifica, para reducir los tiempos muertos y mejorar el flujo de información dentro de una industria, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en el prototipo preliminar de una red de nodos, cada uno con una función específica, para reducir los tiempos muertos y mejorar el flujo de información dentro de una industria, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -107,13 +106,15 @@ Se adjunta a esta acta la planificación inicial.
 \section{Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
-Hoy en día la industria se enfrenta a lo que se denomina la cuarta revolución industrial o la industria 4.0, caracterizada por la interconexión de máquinas y de sistemas en el propio emplazamiento de producción y caracterizada por un fluido intercambio de información con el exterior.
+%Hoy en día la industria se enfrenta a lo que se denomina la cuarta revolución industrial o industria 4.0\footnote{\url{https://es.wikipedia.org/wiki/Industria_4.0}} proponiendo lo que se conoce como ``fábricas inteligentes''. Para ello es necesario un flujo constate de información entre todos los sectores que componen una industria aumentando la eficiencia en la toma de decisiones.  
 
-La evolución de los ámbitos del consumo, su creciente demanda y la continua búsqueda de innovación, son elementos esenciales en el modelo de negocio industrial llamado 4.0, guiado en herramientas tecnológicas y digitales. La Revolución Industrial 4.0 ha sido el eje principal para lograr una implementación tecnológica en este sector. Se basa en la tecnología IoT, Big Data, robótica, IA, entre otros más, permite que los procesos sean más óptimos y eficientes para impulsar una mayor productividad.\footnote{\url{https://es.wikipedia.org/wiki/Industria_4.0}}
+\empclientename es una empresa que se dedica a la fabricación de elementos para la conexión de agua domiciliaria a la red de agua pública con la marca Bronzo Aleaciones. La mayor parte de sus productos se realizan en latón. El proceso de fabricación dentro de la empresa incluye fundición, inyección, mecanizado y armado.
 
-Industrias Meghinasso S.A. es una empresa que se dedica a la fabricación de elementos para la conexión de agua domiciliaria a la red de agua publica con la marca Bronzo Aleaciones. La mayor parte de sus productos se realizan en latón (mal llamado bronce). El proceso de fabricación dentro de la empresa incluye fundición, inyección, mecanizado y armado. 
+Este proyecto se propone introducir a \empclientename a la industria 4.0\footnote{\url{https://es.wikipedia.org/wiki/Industria_4.0}} con el objetivo de convertirla en lo que se conoce como una ``fábrica inteligente''. Para ello se propone una red como la que se observa en la figura \ref{fig:DiagramaRed} con el objetivo de lograr un flujo constante de la información y descentralizar la toma de decisiones.
 
-El objetivo del proyecto es mejorar el control de stock, obtener métricas mas precisas de los desperdicios a lo largo del proceso de fabricación y reducir los tiempos muertos. Para esto se plantea el desarrollo de una serie de dispositivos que se conecten a una red que permitan enviar alertas de estado y a su vez avisarle a quien corresponda para que esa alerta sea atendida. En la figura \ref{fig:DiagramaRed} se puede ver un diagrama de la red propuesta. 
+
+
+%El objetivo del proyecto es mejorar el control de \textit{stock}, obtener métricas más precisas de los desperdicios a lo largo del proceso de fabricación y reducir los tiempos muertos. Para esto se plantea el desarrollo de una serie de dispositivos que se conecten a una red que permita enviar alertas de estado y a su vez avisarle a quien corresponda para que esa alerta sea atendida. En la figura \ref{fig:DiagramaRed} se puede ver un diagrama de la red propuesta. 
 
 \begin{figure}[H]
     \centering
@@ -122,12 +123,18 @@ El objetivo del proyecto es mejorar el control de stock, obtener métricas mas p
     \label{fig:DiagramaRed}
 \end{figure}
 
+La red consistirá de un servidor y cuatro tipos diferentes de nodos:
+\begin{itemize}
+    \item Los nodos simples son aquellos que se conectarán a las máquinas que tienen ciclos de trabajo que no precisan de un operario para funcionar, sino que solo requieren de su atención para la carga y descarga de la misma y el reinicio del ciclo. Estos nodos deberán generar tres tipos de alerta: alarma, máquina en operación y fin de ciclo. Estas serán enviadas al servidor.
+    \item Los nodos CNC tendrán las mismas funciones que los nodos simples y, además, se le agregarán una comunicación serie mediante un puerto RS-232 para poder cargar y descargar los programas de las máquinas. Los programas se gestionarán desde la administración a través del servidor.
+    \item Los nodos de \textit{stock} tendrán que medir cuan llenos están los cajones con piezas y enviar este dato al servidor periódicamente. Cuando los cajones estén por debajo de un límite tendrán que mandar una alerta al servidor y encender un led indicador. Este límite se tendrá que poder configurar desde la administración a través del servidor. 
+    \item Los nodos de los operarios solo recibirán alertas provenientes del servidor. Las alertas les tendrán que indicar que es lo que tienen que hacer. 
+\end{itemize}
+El servidor tendrá dos tareas principales. Por un lado, se tendrá que encargar de llevar un \textit{stock} aproximado en planta de las diferentes piezas en sus diferentes estados de procesamiento. Y, por otro, tendrá que controlar el estado en el que se encuentran las máquinas en planta para que cuando una necesite ser atendida, este asigne la tarea automáticamente a un operario. La asignación de tareas en función de las máquinas, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones tienen que poder configurarse desde la administración.     
 
 
 \section{Identificación y análisis de los interesados}
 \label{sec:interesados}
-
-
 
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
@@ -136,13 +143,13 @@ El objetivo del proyecto es mejorar el control de stock, obtener métricas mas p
 \hline
 \rowcolor[HTML]{C0C0C0} 
 Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Cliente       & \clientename      &\empclientename	& -       	\\ \hline
-Responsable   & \authorname       & Industrias Meghinasso S.A. 	& Ingeniero de Desarrollo 	\\ \hline
-Colaboradores & Matias Meghinasso & Industrias Meghinasso S.A. 	&  \\ \hline
+Cliente       & \clientename      &Industrias\newline Meghinasso S.A.	& Gerente general 	\\ \hline
+Responsable   & \authorname       & Industrias\newline Meghinasso S.A. 	& Ingeniero de Desarrollo 	\\ \hline
+Colaboradores & Matias Meghinasso & Industrias\newline Meghinasso S.A. 	&  Ingeniero de Desarrollo \\ \hline
 Orientador    & \supname	      & \pertesupname 	& Director	Trabajo final \\ \hline
 Usuario final & Operarios,\newline
-                jefe de fabrica,\newline
-                personal administrativo & Industrias Meghinasso S.A. & - \\ \hline
+                jefe de fábrica,
+                personal\newline administrativo & Industrias\newline Meghinasso S.A. & - \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -151,7 +158,7 @@ Usuario final & Operarios,\newline
 \section{1. Propósito del proyecto}
 \label{sec:proposito}
 
-El propósito de este proyecto desarrollar todos los dispositivos esenciales para implementar un red industrial que ayude a bajar los tiempos muertos y mejorar los controles de stock en la planta industrial de Industrias Meghinasso S.A. 
+El propósito de este proyecto es desarrollar todos los dispositivos esenciales para implementar una red industrial que ayude a bajar los tiempos muertos y mejorar los controles de \textit{stock} en la planta industrial de Industrias Meghinasso S.A. 
 
 \section{2. Alcance del proyecto}
 \label{sec:alcance}
@@ -160,7 +167,7 @@ El presente proyecto incluye:
 \begin{itemize}
     \item Prototipo funcional de cada nodo.
     \item Prototipo funcional del servidor.
-    \item Desarrollo y documentación de los firmwares necesarios.
+    \item Desarrollo y documentación del firmware necesario.
     \item Desarrollo de la interfaz de usuario.
     \item Pruebas de validación y verificación.
 \end{itemize}
@@ -177,7 +184,7 @@ Para el desarrollo del presente proyecto se supone que:
 \begin{itemize}
     \item Los fondos necesarios para el proyecto están disponibles.
     \item Los materiales necesarios serán adquiridos en tiempo y forma.
-    \item El tiempo disponible sera suficiente para el desarrollo del proyecto.
+    \item El tiempo disponible será suficiente para el desarrollo del proyecto.
 \end{itemize}
 
 
@@ -187,35 +194,36 @@ Para el desarrollo del presente proyecto se supone que:
 \begin{enumerate}
     \item Requerimientos generales:
     \begin{enumerate}
-        \item Debe poder utilizarse en un ambiente industrial.
-        \item Debe tener comunicación inalámbrica.
-        \item Tiene que contemplar la posibilidad de agregar mas tipos de nodos que los previstos.
+        \item Los nodos deben ser grado IP64.
+        \item La comunicación entre el servidor y los nodos debe ser inalámbrica.
+        \item La documentación del proyecto debe seguirse con control de versiones GIT. 
     \end{enumerate}
     \item Requerimientos del servidor:
     \begin{enumerate}
-        \item Debe poder manejar conexiones simultaneas de los nodos.
-        \item Se tiene que conectar a la red de la fabrica mediante WiFi/Ethernet.
-        \item Debe tener una interfase para poder configurarlo.
+        \item Se tiene que conectar a la red LAN de la fábrica mediante WiFi/Ethernet.
+        \item Debe tener una interfaz para poder configurar la asignación de tareas según la maquina, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones de piezas. Además, se deben poder configurar los parámetros de la comunicación serie de los nodos CNC.
+        \item El tiempo máximo entre consultas para los nodos comunes y CNC tiene que ser de 60 segundos.
+        \item El tiempo máximo entre que se recibe una alerta de una máquina y se le asigna a un operario para que la atienda no puede superar los 10 segundos. 
     \end{enumerate}
     \item Requerimiento de los nodos comunes:
     \begin{enumerate}
-        \item Deben tener entradas para poder leer las alarmas y las alertas de las maquinas.
+        \item Deben tener entradas digitales opto-acopladas para poder leer las alarmas y las alertas de las máquinas. Estas señales son salidas de PLC de 24V DC.
     \end{enumerate}
-    \item Requerimientos de los nodos cnc:
+    \item Requerimientos de los nodos CNC:
     \begin{enumerate}
-        \item Tienen que detectar señales de alarma y fin de ciclo.
-        \item Deben poder subir y bajar archivos mediante protocolo  RS-232.
+        \item Deben tener entradas digitales opto-acopladas para leer señales de alarma, en proceso y fin de ciclo. Estas señales son salidas de PLC de 24V DC.
+        \item Deben poder subir y bajar archivos mediante una comunicación serie utilizando un puerto RS-232. La configuración de los mismo va a depender del controlador de la máquina. Actualmente \empclientename cuenta con controles de las marcas Fanuc y Siemens en sus equipos.
     \end{enumerate}
-    \item Nodos de control de stock:
+    \item Requerimientos de los nodos de control de \textit{stock}:
     \begin{enumerate}
-        \item Tienen que medir la altura de piezas de los tachos. 
-        \item Tienen que mandar alertas cuando la altura sea menor a la configurada.
+        \item Deben medir la altura de piezas de los cajones que tienen 45cm de altura. 
+        \item Deben generar alertas cuando la altura sea menor a la configurada.
     \end{enumerate}
-    \item Nodo para el personal:
+    \item Requerimientos de los nodos para el personal:
     \begin{enumerate}
-        \item Debe poder recibir alertas.
-        \item Debe poder indicar que genero la alerta.
-        \item Debe estar alimentado por una batería recargable.
+        \item Deben poder recibir alertas.
+        \item Deben poder indicar qué generó la alerta.
+        \item Deben estar alimentado por una batería recargable.
     \end{enumerate}
 \end{enumerate}
 
@@ -223,9 +231,14 @@ Para el desarrollo del presente proyecto se supone que:
 \section{Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
-\begin{consigna}{red}
-Descripción: En esta sección se deben incluir las historias de usuarios y su ponderación (\textit{history points}). Recordar que las historias de usuarios son descripciones cortas y simples de una característica contada desde la perspectiva de la persona que desea la nueva capacidad, generalmente un usuario o cliente del sistema. La ponderación es un número entero que representa el tamaño de la historia comparada con otras historias de similar tipo.
-\end{consigna}
+\begin{itemize}
+    \item Como gerente de compras quiero saber el nivel de \textit{stock} que hay en planta para poder programar la compra de materia prima. Ponderación: 3
+    \item Como jefe de fábrica quiero saber los niveles de \textit{stock} en sus diferentes estados de procesamiento para mejorar la programación de la producción. Ponderación: 5
+    \item Como jefe de fábrica quiero saber que máquinas están desocupadas para asignarles una tarea lo antes posible. Ponderación: 8
+    \item Como operario quiero saber cuando una de las máquinas de las que soy responsable termina su trabajo para volverla a ponerla a trabajar en el menor tiempo posible. Ponderación: 8
+    \item Como jefe de despacho quiero asegurarme que voy a tener todas las piezas necesarias para armar los pedidos. Ponderación: 3
+\end{itemize}
+
 
 \section{5. Entregables principales del proyecto}
 \label{sec:entregables}
@@ -243,63 +256,66 @@ Descripción: En esta sección se deben incluir las historias de usuarios y su p
 \label{sec:wbs}
 
 \begin{enumerate}
-    \item Análisis del proyecto
+    \item Análisis del proyecto \textbf{(40 hs)}
     \begin{enumerate}
-        \item Definir el alcance del proyecto
-        \item Planificación
-        \item Búsqueda de información de comunicaciones inalámbricas en ambientes industriales.
+        \item Definir el alcance del proyecto. (20 hs)
+        \item Planificación. (14 hs)
+        \item Búsqueda de información de comunicaciones inalámbricas en ambientes industriales. (6 hs)
     \end{enumerate}
-    \item Definiciones generales del proyecto
+    \item Definiciones generales del proyecto \textbf{(60 hs)}
     \begin{enumerate}
-        \item Definir la arquitectura de la red.
-        \item Definir el protocolo de comunicación.
-        \item Definir la arquitectura de la interfaz de usuario.
+        \item Definir la arquitectura de la red. (18 hs)
+        \item Definir el protocolo de comunicación. (16 hs)
+        \item Definir la arquitectura de la interfaz de usuario. (12 hs)
+        \item Definir método para realizar la medición de la altura de piezas en los cajones. (10 hs)
+        \item Documentación. (4 hs)
     \end{enumerate}
-    \item Diseño y armado del hardware
+    \item Diseño y armado del hardware - Servidor \textbf{(70 hs)}
     \begin{enumerate}
-        \item Servidor.
-        \begin{enumerate}
-            \item 
-        \end{enumerate}
-        \item Armado del nodo común.
-        \item Armado del nodo CNC.
-        \item Armado del nodo de stock.
-        \item Armado del nodo para el personal.
+        \item Estudio y selección de arquitectura. (30 hs)
+        \item Selección de componentes. (20 hs)
+        \item Adquisición de componentes. (4 hs)
+        \item Pruebas iniciales de funcionamiento. (12 hs)
+        \item Documentación. (4 hs)
     \end{enumerate}
-    \item 
+    \item Diseño y armado del hardware - Nodos \textbf{(70 hs)}
+    \begin{enumerate}
+        \item Estudio y selección de arquitectura. (30 hs)
+        \item Selección de componentes. (20 hs)
+        \item Adquisición de componentes. (4 hs)
+        \item Pruebas iniciales de funcionamiento. (12 hs)
+        \item Documentación. (4 hs)
+    \end{enumerate}
+    \item Desarrollo del firmware \textbf{(180 hs)}
+    \begin{enumerate}
+        \item Comunicación del servidor con la red LAN de la fábrica. (45 hs)
+        \item Interfaz de usuario del servidor. (45 hs)
+        \item Comunicación de los nodos con el servidor. (20 hs)
+        \item Generación de alertas de alarma, máquina en operación y fin de ciclo de los nodos comunes y CNC. (20 hs)
+        \item Comunicación serie mediante puerto RS-232 en los nodos CNC. (20 hs)
+        \item Alertas sonoras en los nodos de los operarios. (16 hs)
+        \item Medición de la altura de piezas en los nodos de \textit{stock}. (10 hs)
+        \item Documentación. (4 hs)
+    \end{enumerate}
+    \item Verificación \textbf{(100 hs)}
+    \begin{enumerate}
+        \item Verificación de la comunicación serie de los nodos CNC. (30 hs)
+        \item Verificación del tiempo máximo de consulta de los nodos comunes y CNC. (24 hs)
+        \item Verificación del tiempo máximo desde que el servidor recibe una alerta hasta que se asigna un operario para que la atienda. (22 hs)
+        \item Verificación de la medición de altura de los nodos de \textit{stock}. (20 hs)
+        \item Documentación. (4 hs)
+    \end{enumerate}
+    \item Documentación \textbf{(80 hs)}
+    \begin{enumerate}
+        \item Manual de uso. (16 hs)
+        \item Memoria del trabajo final. (52 hs)
+        \item Presentación final. (12 hs)
+    \end{enumerate}
 \end{enumerate}
 
-\begin{consigna}{red}
-Se recomienda mostrar el WBS mediante una lista indexada:
+Cantidad total de horas: 600 hs.
 
-\begin{enumerate}
-\item Grupo de tareas 1
-	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\end{enumerate}
-\item Grupo de tareas 2
-	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\end{enumerate}
-	\item Grupo de tareas 3
-	\begin{enumerate}
-	\item Tarea 1 (tantas hs)
-	\item Tarea 2 (tantas hs)
-	\item Tarea 3 (tantas hs)
-	\item Tarea 4 (tantas hs)
-	\item Tarea 5 (tantas hs)
-	\end{enumerate}
-\end{enumerate}
 
-Cantidad total de horas: (tantas hs)
-
-Se recomienda que no haya ninguna tarea que lleve más de 40 hs. 
-
-\end{consigna}
 
 \section{7. Diagrama de Activity On Node}
 \label{sec:AoN}
