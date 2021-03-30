@@ -11,7 +11,7 @@
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
-\autor{Federico Meghinasso} 
+\autor{Ing. Federico Meghinasso} 
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
 \director{Nombre del Director}
@@ -67,6 +67,7 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
 1.2      & Se corrigió la descripción técnica\newline
            Se terminó el punto 6\newline
            Se agregaron historias de usuario & 23/03/2021 \\ \hline
+1.3      & Se agrego hasta el punto 11      & 30/03/2021  \\ \hline      
 \end{tabularx}
 \end{table}
 
@@ -128,7 +129,7 @@ La red consistirá de un servidor y cuatro tipos diferentes de nodos:
     \item Los nodos simples son aquellos que se conectarán a las máquinas que tienen ciclos de trabajo que no precisan de un operario para funcionar, sino que solo requieren de su atención para la carga y descarga de la misma y el reinicio del ciclo. Estos nodos deberán generar tres tipos de alerta: alarma, máquina en operación y fin de ciclo. Estas serán enviadas al servidor.
     \item Los nodos CNC tendrán las mismas funciones que los nodos simples y, además, se le agregarán una comunicación serie mediante un puerto RS-232 para poder cargar y descargar los programas de las máquinas. Los programas se gestionarán desde la administración a través del servidor.
     \item Los nodos de \textit{stock} tendrán que medir cuan llenos están los cajones con piezas y enviar este dato al servidor periódicamente. Cuando los cajones estén por debajo de un límite tendrán que mandar una alerta al servidor y encender un led indicador. Este límite se tendrá que poder configurar desde la administración a través del servidor. 
-    \item Los nodos de los operarios solo recibirán alertas provenientes del servidor. Las alertas les tendrán que indicar que es lo que tienen que hacer. 
+    \item Los nodos de los operarios solo recibirán alertas provenientes del servidor. Las alertas les tendrán que indicar qué es lo que tienen que hacer. 
 \end{itemize}
 El servidor tendrá dos tareas principales. Por un lado, se tendrá que encargar de llevar un \textit{stock} aproximado en planta de las diferentes piezas en sus diferentes estados de procesamiento. Y, por otro, tendrá que controlar el estado en el que se encuentran las máquinas en planta para que cuando una necesite ser atendida, este asigne la tarea automáticamente a un operario. La asignación de tareas en función de las máquinas, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones tienen que poder configurarse desde la administración.     
 
@@ -201,7 +202,7 @@ Para el desarrollo del presente proyecto se supone que:
     \item Requerimientos del servidor:
     \begin{enumerate}
         \item Se tiene que conectar a la red LAN de la fábrica mediante WiFi/Ethernet.
-        \item Debe tener una interfaz para poder configurar la asignación de tareas según la maquina, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones de piezas. Además, se deben poder configurar los parámetros de la comunicación serie de los nodos CNC.
+        \item Debe tener una interfaz para poder configurar la asignación de tareas según la máquina, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones de piezas. Además, se deben poder configurar los parámetros de la comunicación serie de los nodos CNC.
         \item El tiempo máximo entre consultas para los nodos comunes y CNC tiene que ser de 60 segundos.
         \item El tiempo máximo entre que se recibe una alerta de una máquina y se le asigna a un operario para que la atienda no puede superar los 10 segundos. 
     \end{enumerate}
@@ -212,18 +213,18 @@ Para el desarrollo del presente proyecto se supone que:
     \item Requerimientos de los nodos CNC:
     \begin{enumerate}
         \item Deben tener entradas digitales opto-acopladas para leer señales de alarma, en proceso y fin de ciclo. Estas señales son salidas de PLC de 24V DC.
-        \item Deben poder subir y bajar archivos mediante una comunicación serie utilizando un puerto RS-232. La configuración de los mismo va a depender del controlador de la máquina. Actualmente \empclientename cuenta con controles de las marcas Fanuc y Siemens en sus equipos.
+        \item Deben poder subir y bajar archivos mediante una comunicación serie utilizando un puerto RS-232. La configuración va a depender del controlador de la máquina. Actualmente \empclientename cuenta con controles de las marcas Fanuc y Siemens en sus equipos.
     \end{enumerate}
     \item Requerimientos de los nodos de control de \textit{stock}:
     \begin{enumerate}
-        \item Deben medir la altura de piezas de los cajones que tienen 45cm de altura. 
+        \item Deben medir la altura de piezas de los cajones que tienen 45 cm de altura. 
         \item Deben generar alertas cuando la altura sea menor a la configurada.
     \end{enumerate}
     \item Requerimientos de los nodos para el personal:
     \begin{enumerate}
         \item Deben poder recibir alertas.
         \item Deben poder indicar qué generó la alerta.
-        \item Deben estar alimentado por una batería recargable.
+        \item Deben estar alimentado por una batería recargable de litio de 3.7 V con la capacidad necesaria para alimentar el nodo durante 6 jornadas laborales de 9 hs sin ser recargada.
     \end{enumerate}
 \end{enumerate}
 
@@ -231,13 +232,69 @@ Para el desarrollo del presente proyecto se supone que:
 \section{Historias de usuarios (\textit{Product backlog})}
 \label{sec:backlog}
 
-\begin{itemize}
-    \item Como gerente de compras quiero saber el nivel de \textit{stock} que hay en planta para poder programar la compra de materia prima. Ponderación: 3
-    \item Como jefe de fábrica quiero saber los niveles de \textit{stock} en sus diferentes estados de procesamiento para mejorar la programación de la producción. Ponderación: 5
-    \item Como jefe de fábrica quiero saber que máquinas están desocupadas para asignarles una tarea lo antes posible. Ponderación: 8
-    \item Como operario quiero saber cuando una de las máquinas de las que soy responsable termina su trabajo para volverla a ponerla a trabajar en el menor tiempo posible. Ponderación: 8
-    \item Como jefe de despacho quiero asegurarme que voy a tener todas las piezas necesarias para armar los pedidos. Ponderación: 3
-\end{itemize}
+Para analizar las historias de usuarios se utilizara el siguiente criterio:
+\renewcommand{\theenumi}{\Alph{enumi}}
+\begin{enumerate}
+    \item Cantidad de trabajo a realizar
+    \begin{itemize}
+        \item Bajo: 1
+        \item Medio: 5
+        \item Alto: 13
+    \end{itemize}
+    \item Complejidad del trabajo a realizar
+    \begin{itemize}
+        \item Bajo: 1
+        \item Medio: 3
+        \item Alto: 8
+    \end{itemize}
+    \item Incertidumbre del trabajo a realizar
+    \begin{itemize}
+        \item Bajo: 1
+        \item Medio: 2
+        \item Alto: 3
+    \end{itemize}
+\end{enumerate}
+
+Se analizaron las siguientes historias:
+
+\renewcommand{\theenumi}{\arabic{enumi}}
+\begin{enumerate}
+    \item Como gerente de compras quiero saber el nivel de \textit{stock} que hay en planta para poder programar la compra de materia prima. 
+    \begin{itemize}
+        \item A: 13
+        \item B: 3
+        \item C: 1
+    \end{itemize}
+    \textit{Storypoints}:21
+    \item Como jefe de fábrica quiero saber los niveles de \textit{stock} en sus diferentes estados de procesamiento para mejorar la programación de la producción.
+    \begin{itemize}
+        \item A: 13
+        \item B: 8
+        \item C: 1
+    \end{itemize}
+    \textit{Storypoints}:34
+    \item Como jefe de fábrica quiero saber que máquinas están desocupadas para asignarles una tarea lo antes posible. 
+    \begin{itemize}
+        \item A: 5
+        \item B: 8
+        \item C: 3
+    \end{itemize}
+    \textit{Storypoints}:21
+    \item Como operario quiero saber cuando una de las máquinas de las que soy responsable termina su trabajo para volverla a ponerla a trabajar en el menor tiempo posible. 
+    \begin{itemize}
+        \item A: 5
+        \item B: 3
+        \item C: 3
+    \end{itemize}
+    \textit{Storypoints}:13
+    \item Como jefe de despacho quiero asegurarme que voy a tener todas las piezas necesarias para armar los pedidos. 
+    \begin{itemize}
+        \item A: 5
+        \item B: 3
+        \item C: 1
+    \end{itemize}
+    \textit{Storypoints}:13
+\end{enumerate}
 
 
 \section{5. Entregables principales del proyecto}
@@ -320,130 +377,63 @@ Cantidad total de horas: 600 hs.
 \section{7. Diagrama de Activity On Node}
 \label{sec:AoN}
 
-\begin{consigna}{red}
-Armar el AoN a partir del WBS definido en la etapa anterior. 
-
-%La figura \ref{fig:AoN} fue elaborada con el paquete latex tikz y pueden consultar la siguiente referencia \textit{online}:
-
-%\url{https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ:_A_Tutorial_for_Beginners_(Part_3)\%E2\%80\%94Creating_Flowcharts}
-
-\end{consigna}
-
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.8\textwidth]{./Figuras/AoN.png}
+\includegraphics[width=\textwidth]{./Figuras/AoN-Plan de Proyecto.jpg}
 \caption{Diagrama en \textit{Activity on Node}}
 \label{fig:AoN}
 \end{figure}
-
-Indicar claramente en qué unidades están expresados los tiempos.
-De ser necesario indicar los caminos semicríticos y analizar sus tiempos mediante un cuadro.
-Es recomendable usar colores y un cuadro indicativo describiendo qué representa cada color, como se muestra en el siguiente ejemplo:
-
-
+\newpage
 
 \section{8. Diagrama de Gantt}
 \label{sec:gantt}
-
-\begin{consigna}{red}
-Utilizar el software Gantter for Google Drive o alguno similar para dibujar el diagrama de Gantt.
-
-Existen muchos programas y recursos \textit{online} para hacer diagramas de gantt, entre las cuales destacamos:
-
-\begin{itemize}
-\item Planner
-\item GanttProject
-\item Trello + \textit{plugins}. En el siguiente link hay un tutorial oficial: \\ \url{https://blog.trello.com/es/diagrama-de-gantt-de-un-proyecto}
-\item Creately, herramienta online colaborativa. \\\url{https://creately.com/diagram/example/ieb3p3ml/LaTeX}
-\item Se puede hacer en latex con el paquete \textit{pgfgantt}\\ \url{http://ctan.dcc.uchile.cl/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf}
-\end{itemize}
-
-Pegar acá una captura de pantalla del diagrama de Gantt, cuidando que la letra sea suficientemente grande como para ser legible. 
-Si el diagrama queda demasiado ancho, se puede pegar primero la ``tabla'' del Gantt y luego pegar la parte del diagrama de barras del diagrama de Gantt.
-
-Configurar el software para que en la parte de la tabla muestre los códigos del EDT (WBS).\\
-Configurar el software para que al lado de cada barra muestre el nombre de cada tarea.\\
-Revisar que la fecha de finalización coincida con lo indicado en el Acta Constitutiva.
-
-En la figura \ref{fig:gantt}, se muestra un ejemplo de diagrama de gantt realizado con el paquete de \textit{pgfgantt}. En la plantilla pueden ver el código que lo genera y usarlo de base para construir el propio.
-
-\begin{figure}[htbp]
-\begin{center}
-\begin{ganttchart}{1}{12}
-  \gantttitle{2020}{12} \\
-  \gantttitlelist{1,...,12}{1} \\
-  \ganttgroup{Group 1}{1}{7} \\
-  \ganttbar{Task 1}{1}{2} \\
-  \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-  \ganttmilestone{Milestone o hito}{7} \ganttnewline
-  \ganttbar{Final Task}{8}{12}
-  \ganttlink{elem2}{elem3}
-  \ganttlink{elem3}{elem4}
-\end{ganttchart}
-\end{center}
-\caption{Diagrama de gantt de ejemplo}
-\label{fig:gantt}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[scale=0.7]{Figuras/tareasGantt.png}
+\caption{Tabla de tareas del diagrama de gantt}
+\label{fig:tareasGantt}
 \end{figure}
 
-\end{consigna}
+\begin{landscape}
+\begin{figure}[htpb]
+\centering 
+\includegraphics[scale=0.6]{Figuras/gantt.png}
+\caption{Diagrama de \textit{gantt}}
+\label{fig:gantt}
+\end{figure}
+\end{landscape}
+
+
 
 \section{9. Matriz de uso de recursos de materiales}
 \label{sec:recursos}
 
 
-\begin{table}
+\begin{table}[H]
 \label{tab:recursos}
 \centering
-\begin{tabularx}{\linewidth}{@{}|c|X|X|X|X|c|@{}}
+\begin{tabular}{|c|c|c|c|c|}
 \hline
-\cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Recursos requeridos (horas)} \\ \cline{3-6} 
-\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} & \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Nombre \\ tarea\end{tabular}} & Material 1 & Material 2 & Material 3 & Material 4 \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline 
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline 
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
-
-\end{tabularx}%
+\cellcolor[HTML]{C0C0C0} & \cellcolor[HTML]{C0C0C0} & \multicolumn{3}{c|}{\cellcolor[HTML]{C0C0C0}Recursos requeridos (horas)} \\ \cline{3-5} 
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} & \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Nombre \\ tarea\end{tabular}} & Computadora & Placa desarrollo & Lab. Electrónica \\ \hline
+1 & Análisis del proyecto & 40 &  & \\ \hline
+2 & Definiciones generales & 60 & & \\ \hline
+3.1 - 3.3 & Diseño y armado servidor & 54 & & \\ \hline
+3.4 & Pruebas iniciales & 12 & 12 & 12 \\ \hline
+3.5 & Documentación & 4 & & \\ \hline
+4.1 - 4.3 & Diseño y armado servidor & 54 & & \\ \hline
+4.4 & Pruebas iniciales & 12 & 12 & 12 \\ \hline
+4.5 & Documentación & 4 & & \\ \hline
+5 & Desarrollo del firmware & 180 & 180 & \\ \hline
+6 & Verificación & 100 & 100 & \\ \hline
+7 & Documentación & 80 & & \\ \hline
+\end{tabular}%
 \end{table}
 
 
 \section{10. Presupuesto detallado del proyecto}
 \label{sec:presupuesto}
 
-\begin{consigna}{red}
-Si el proyecto es complejo entonces separarlo en partes:
-\begin{itemize}
-\item Un total global, indicando el subtotal acumulado por cada una de las áreas.
-\item El desglose detallado del subtotal de cada una de las áreas.
-\end{itemize}
-
-IMPORTANTE: No olvidarse de considerar los COSTOS INDIRECTOS.
-
-\end{consigna}
 
 \begin{table}[htpb]
 \centering
@@ -456,24 +446,20 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
- &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} &
-  \multicolumn{1}{c|}{} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+ Componentes electrónicos varios &
+  1 &
+  U\$S 350 &
+   U\$S 350 \\ \hline
+ Placa de desarrollo &
+  5 &
+  U\$S 120 &
+  U\$S 600 \\ \hline
+Horas de ingeniería &
+  600 &
+  U\$S 10 &
+  U\$S 6000 \\ \hline
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  U\$S 6950 \\ \hline
 \rowcolor[HTML]{C0C0C0} 
 \multicolumn{4}{|c|}{\cellcolor[HTML]{C0C0C0}COSTOS INDIRECTOS} \\ \hline
 \rowcolor[HTML]{C0C0C0} 
@@ -481,31 +467,22 @@ Descripción &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Cantidad} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor unitario} &
   \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Valor total} \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
-\multicolumn{1}{|l|}{} &
-   &
-   &
-   \\ \hline
+30\% de los costos directos &
+  1 &
+  U\$S 2085 &
+  U\$S 2085 \\ \hline
 \multicolumn{3}{|c|}{SUBTOTAL} &
-  \multicolumn{1}{c|}{} \\ \hline
+  U\$S 2085 \\ \hline
 \rowcolor[HTML]{C0C0C0}
 \multicolumn{3}{|c|}{TOTAL} &
-   \\ \hline
+  U\$S 9035 \\ \hline
 \end{tabularx}%
 \end{table}
 
 
 \section{11. Matriz de asignación de responsabilidades}
 \label{sec:responsabilidades}
-\begin{consigna}{red}
-Establecer la matriz de asignación de responsabilidades y el manejo de la autoridad completando la siguiente tabla:
+
 
 \begin{table}[htpb]
 \centering
@@ -515,24 +492,32 @@ Establecer la matriz de asignación de responsabilidades y el manejo de la autor
 \rowcolor[HTML]{C0C0C0} 
 \cellcolor[HTML]{C0C0C0} &
   \cellcolor[HTML]{C0C0C0} &
-  \multicolumn{4}{c|}{\cellcolor[HTML]{C0C0C0}Listar todos los nombres y roles del proyecto} \\ \cline{3-6} 
-\rowcolor[HTML]{C0C0C0} 
-\cellcolor[HTML]{C0C0C0} &
-  \cellcolor[HTML]{C0C0C0} &
   Responsable &
   Orientador &
   Equipo &
   Cliente \\ \cline{3-6} 
 \rowcolor[HTML]{C0C0C0} 
-\multirow{-3}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} &
-  \multirow{-3}{*}{\cellcolor[HTML]{C0C0C0}Nombre de la tarea} &
+\multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} &
+  \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Nombre de la tarea} &
   \authorname &
   \supname &
-  Nombre de alguien &
+  Matias Meghinasso &
   \clientename \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
+1 & Análisis del proyecto & P & C & - & S \\ \hline
+2 & Definiciones generales & P & C & - & - \\ \hline
+3.1 & Estudio y elección arquitectura servidor & P & C & S & - \\ \hline
+3.2 & Definición protocolo comunicación & P & C & S & - \\ \hline
+3.3 & Adquisición de componentes & P & - & S & A \\ \hline
+3.4 & Pruebas iniciales & P & I & S & - \\ \hline
+3.5 & Documentación & P & I & - & - \\ \hline
+4.1 & Estudio y elección arquitectura nodos & P & C & S & - \\ \hline
+4.2 & Definición protocolo comunicación & P & C & S & - \\ \hline
+4.3 & Adquisición de componentes & P & - & S & A \\ \hline
+4.4 & Pruebas iniciales & P & I & S & - \\ \hline
+4.5 & Documentación & P & I & - & - \\ \hline
+5 & Desarrollo del firmware & P & C & S & I \\ \hline
+6 & Verificación & P & I & S & C/A \\ \hline
+7 & Documentación & P & C/A & - & I \\ \hline
 \end{tabular}%
 }
 \end{table}
@@ -548,12 +533,7 @@ Referencias:
 \end{itemize}
 } %footnotesize
 
-Una de las columnas debe ser para el Director, ya que se supone que participará en el proyecto.
-A su vez se debe cuidar que no queden muchas tareas seguidas sin ``A'' o ``I''.
 
-Importante: es redundante poner ``I/A'' o ``I/C'', porque para aprobarlo o responder consultas primero la persona debe ser informada.
-
-\end{consigna}
 
 \section{12. Gestión de riesgos}
 \label{sec:riesgos}
