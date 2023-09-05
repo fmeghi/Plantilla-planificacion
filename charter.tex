@@ -14,8 +14,8 @@
 \autor{Ing. Federico Meghinasso} 
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
-\director{Nombre del Director}
-\pertenenciaDirector{pertenencia} 
+\director{Esp. Ing. Pablo Slavkin}
+\pertenenciaDirector{Novospace} 
 % FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
 \codirector{} % si queda vacio no se deberíá incluir 
 \pertenenciaCoDirector{}
@@ -69,6 +69,7 @@ Revisión & \multicolumn{1}{c|}{\cellcolor[HTML]{C0C0C0}Detalles de los cambios 
            Se agregaron historias de usuario & 23/03/2021 \\ \hline
 1.3      & Se agregó hasta el punto 11      & 30/03/2021  \\ \hline
 1.4     & Se agregó hasta el punto 17       & 6/4/2021 \\ \hline
+1.5     & Se hicieron correcciones y se agregó el director       & 13/4/2021 \\ \hline
 \end{tabularx}
 \end{table}
 
@@ -501,7 +502,7 @@ Descripción &
 \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Código\\ WBS\end{tabular}} &
   \multirow{-2}{*}{\cellcolor[HTML]{C0C0C0}Nombre de la tarea} &
   F. Meghinasso &
-  \supname &
+  P. Slavkin&
   M. Meghinasso &
   R. Meghinasso \\ \hline
 1 & Análisis del proyecto & P & C & - & S \\ \hline
@@ -542,18 +543,18 @@ Referencias:
 Riesgo 1: No cumplir con los plazos de entrega establecidos.
 \begin{itemize}
     \item Severidad (S):7, se retrasaría la entrega de todo el trabajo.
-    \item Ocurrencia (O):3, la empresa esta interesada en que se termine el trabajo lo más rápido posible por lo que le permitirá al responsable emplear el tiempo que le sea necesario durante la jornada laboral.
+    \item Ocurrencia (O):3, la empresa está interesada en que se termine el trabajo lo más rápido posible por lo que le permitirá al responsable emplear el tiempo que le sea necesario durante la jornada laboral.
 \end{itemize}
 
 Riesgo 2: Demoras en la adquisición de los componentes.
 \begin{itemize}
     \item Severidad (S):8, sin los componentes necesarios se frena el proyecto completo.
-    \item Ocurrencia (O):3, los componentes necesarios no son tas específicos y se pueden conseguir reemplazos. 
+    \item Ocurrencia (O):3, los componentes necesarios no son tan específicos y se pueden conseguir reemplazos. 
 \end{itemize}
 Riesgo 3: Dificultades para establecer una comunicación inalámbrica debido al ruido electromagnético presente en la fábrica.
 \begin{itemize}
     \item Severidad (S):10, sin la comunicación inalámbrica el proyecto se vuelve muy difícil de implementar.  
-    \item Ocurrencia (O):2, hoy en se utiliza una red vía \textit{Wi-Fi} y la misma no presenta mayores problemas.
+    \item Ocurrencia (O):2, hoy en día se utiliza una red vía \textit{Wi-Fi} y la misma no presenta mayores problemas.
 \end{itemize}
 Riesgo 4: No encontrar un método adecuado para estimar la cantidad de piezas en los cajones.
 \begin{itemize}
@@ -562,8 +563,8 @@ Riesgo 4: No encontrar un método adecuado para estimar la cantidad de piezas en
 \end{itemize}
 Riesgo 5: No tener disponibilidad de máquina para hacer las pruebas correspondientes.
 \begin{itemize}
-    \item Severidad (S):6, si no se dispone de una maquina se complica hacer las pruebas necesarias, en particular las de CNC.
-    \item Ocurrencia (O):6, por lo general las maquinas están ocupadas y el único momento que quedan disponibles es cuando se hacen los cambios de pieza.
+    \item Severidad (S):6, si no se dispone de una máquina se complica hacer las pruebas necesarias, en particular las de CNC.
+    \item Ocurrencia (O):6, por lo general las máquinas están ocupadas y el único momento que quedan disponibles es cuando se hacen los cambios de pieza.
 \end{itemize}
 
 
@@ -586,8 +587,8 @@ Se tomaran medidas de mitigación en los riesgos cuyo RPN sea mayor a 30.
 
 Riesgo 5: Hacer las pruebas fuera de hora.
 \begin{itemize}
-    \item Severidad (S*):6, si no se dispone de una maquina se complica hacer las pruebas necesarias, en particular las de CNC.
-    \item Ocurrencia (O*):4, fuera de hora es mas fácil tener disponible una maquina.
+    \item Severidad (S*):6, si no se dispone de una máquina se complica hacer las pruebas necesarias, en particular las de CNC.
+    \item Ocurrencia (O*):4, fuera de hora es más fácil tener disponible una máquina.
 \end{itemize}
 
 \section{13. Gestión de la calidad}
@@ -607,7 +608,7 @@ Riesgo 5: Hacer las pruebas fuera de hora.
     \item Req \#2.2: Debe tener una interfaz para poder configurar la asignación de tareas según la máquina, los parámetros para calcular el \textit{stock} y las alturas mínimas de los cajones de piezas. Además, se deben poder configurar los parámetros de la comunicación serie de los nodos CNC.
     \begin{itemize}
         \item Verificación: Se probará la interfaz y cada una de sus funciones viendo que se puedan cargar los parámetros y que los datos sean correctos.
-        \item Validación: Se configuraran una maquina y una cajón y se controlara  que los datos sean correctos.
+        \item Validación: Se configurarán una máquina y una cajón y se controlará  que los datos sean correctos.
     \end{itemize}
     \item Req \#2.3 y \#2.4: Tiempos de comunicación.
     \begin{itemize}
@@ -616,12 +617,12 @@ Riesgo 5: Hacer las pruebas fuera de hora.
     \end{itemize}
     \item Req \#4.2: Deben poder subir y bajar archivos mediante una comunicación serie utilizando un puerto RS-232. La configuración va a depender del controlador de la máquina.
     \begin{itemize}
-        \item Verificación: Se va a conectar el nodo a una máquina CNC y se probara la carga y descarga de un programa. 
-        \item Validación: Desde la administración se intentara cargar y descargar un programa de una máquina CNC.
+        \item Verificación: Se va a conectar el nodo a una máquina CNC y se probará la carga y descarga de un programa. 
+        \item Validación: Desde la administración se intentará cargar y descargar un programa de una máquina CNC.
     \end{itemize}
     \item Req \#5.1: Deben medir la altura de piezas de los cajones que tienen 45 cm de altura.
     \begin{itemize}
-        \item Verificación: Se colocan un numero de piezas conocido en un cajón y se toma la lectura.  
+        \item Verificación: Se colocan un número de piezas conocido en un cajón y se toma la lectura.  
         \item Validación: Se pesa uno de los cajones en fábrica para estimar a cantidad de piezas y luego se mide con el nodo y se comparan las estimaciones.  
     \end{itemize}
 \end{itemize}
@@ -641,8 +642,8 @@ El plan de comunicación del proyecto es el siguiente:
 \rowcolor[HTML]{C0C0C0} 
 ¿Qué comunicar? & Audiencia & Propósito & Frecuencia & Método de comunicac. & Responsable \\ \hline
  Plan de trabajo  & Todos los interesados  &  Alcance del proyecto  &  Única vez   &  Presencial  & F. Meghinasso  \\ \hline
-Avances del proyecto   &   Director y R. Meghinasso  &  Informar el progreso  &  20 dias  & Virtual &  F. Meghinasso  \\ \hline
-Consultas   &  Director  & Sugerencias y despeje de dudas & 20 dias  &  Virtual & F. Meghinasso \\ \hline
+Avances del proyecto   &   Director y R. Meghinasso  &  Informar el progreso  &  20 días  & Virtual &  F. Meghinasso  \\ \hline
+Consultas   &  Director  & Sugerencias y despeje de dudas & 20 días  &  Virtual & F. Meghinasso \\ \hline
 Fin del proyecto  & Todos los interesados & Resultados del proyecto  & Única vez & Presencial & F. Meghinasso \\ \hline
 \end{tabularx}
 \end{table}
@@ -650,7 +651,16 @@ Fin del proyecto  & Todos los interesados & Resultados del proyecto  & Única ve
 \section{15. Gestión de compras}
 \label{sec:compras}
 
-Federico Meghinasso será el encargado de realizar las compras necesarias para llevar a cabo el proyecto.
+Federico Meghinasso será el encargado de realizar las compras necesarias para llevar a cabo el proyecto. Para elegir el proveedor de componentes se van a tener en cuenta los siguientes criterios en ese orden de prioridad:
+
+\begin{enumerate}
+    \item Precio y condiciones de pago.
+    \item Disponibilidad.
+    \item Costos de envío.
+    \item Tiempo de entrega.
+\end{enumerate}
+
+\pagebreak
 
 \section{16. Seguimiento y control}
 \label{sec:seguimiento}
@@ -663,16 +673,16 @@ Federico Meghinasso será el encargado de realizar las compras necesarias para l
 \multicolumn{6}{|c|}{\cellcolor[HTML]{C0C0C0}{\color[HTML]{000000} SEGUIMIENTO DE AVANCE}}                                                                                                                                                                                                                                                                                                                                                                                                                                                          \\ \hline
 \rowcolor[HTML]{C0C0C0} 
 {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Tarea\\ del\\ WBS\end{tabular}} & {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Indicador de \\ avance\end{tabular}} & {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Frecuencia \\ de reporte\end{tabular}}      & {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Resp. de \\ seguimiento\end{tabular}} & {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Persona a ser\\ informada\end{tabular}} & {\color[HTML]{000000} \begin{tabular}[c]{@{}l@{}}Método\\ de\\ comunic.\end{tabular}} \\ \hline
-1.1 - 1.3                                                                        & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}1 vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ R. Meghinasso\end{tabular}                         & e-mail                                                                                \\ \hline
-2.1 - 2.4                                                                        & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}1 vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
-3.1                                                                              & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & 1 vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
-3.2 - 3.4                                                                        & Informe                                                                               & \begin{tabular}[c]{@{}l@{}}1 vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
-4.1                                                                              & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & 1 vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
-4.2 - 4.4                                                                        & Informe                                                                               & \begin{tabular}[c]{@{}l@{}}1 vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
-5.1 - 5.7                                                                        & \begin{tabular}[c]{@{}l@{}}Informe y \\ prototipo\end{tabular}                        & \begin{tabular}[c]{@{}l@{}}1 vez cada 2\\ semanas mientras \\ duren las tareas.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\end{tabular}                         & e-mail                                                                                \\ \hline
-6.1 - 6.4                                                                        & \begin{tabular}[c]{@{}l@{}}Informe y \\ prototipo\end{tabular}                        & \begin{tabular}[c]{@{}l@{}}1 vez cada 2\\ semanas mientras \\ duren las tareas.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\\ R. Meghinasso\end{tabular}         & e-mail                                                                                \\ \hline
-7.1                                                                              & Documento                                                                             & 1 vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}M. Meghinasso\\ R. Meghinasso\end{tabular}                    & e-mail                                                                                \\ \hline
-7.2                                                                              & Documento                                                                             & 1 vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\\ R. Meghinasso\end{tabular}         & e-mail                                                                                \\ \hline
+1.1 - 1.3                                                                        & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}Una vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ R. Meghinasso\end{tabular}                         & e-mail                                                                                \\ \hline
+2.1 - 2.4                                                                        & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & \begin{tabular}[c]{@{}l@{}}Una vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
+3.1                                                                              & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & Una vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
+3.2 - 3.4                                                                        & Informe                                                                               & \begin{tabular}[c]{@{}l@{}}Una vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
+4.1                                                                              & \begin{tabular}[c]{@{}l@{}}Reporte de \\ definición\end{tabular}                      & Una vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
+4.2 - 4.4                                                                        & Informe                                                                               & \begin{tabular}[c]{@{}l@{}}Una vez por \\ semana mientras \\ duren las tareas.\end{tabular}    & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & Director                                                                                 & e-mail                                                                                \\ \hline
+5.1 - 5.7                                                                        & \begin{tabular}[c]{@{}l@{}}Informe y \\ prototipo\end{tabular}                        & \begin{tabular}[c]{@{}l@{}}Una vez cada 2\\ semanas mientras \\ duren las tareas.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\end{tabular}                         & e-mail                                                                                \\ \hline
+6.1 - 6.4                                                                        & \begin{tabular}[c]{@{}l@{}}Informe y \\ prototipo\end{tabular}                        & \begin{tabular}[c]{@{}l@{}}Una vez cada 2\\ semanas mientras \\ duren las tareas.\end{tabular} & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\\ R. Meghinasso\end{tabular}         & e-mail                                                                                \\ \hline
+7.1                                                                              & Documento                                                                             & Una vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}M. Meghinasso\\ R. Meghinasso\end{tabular}                    & e-mail                                                                                \\ \hline
+7.2                                                                              & Documento                                                                             & Una vez                                                                                        & \begin{tabular}[c]{@{}l@{}}Federico \\ Meghinasso\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}Director\\ M. Meghinasso\\ R. Meghinasso\end{tabular}         & e-mail                                                                                \\ \hline
 \end{tabular}
 \end{table}
 
@@ -687,8 +697,8 @@ Federico Meghinasso será el encargado de realizar las compras necesarias para l
 \begin{itemize}
 \item Pautas de trabajo que se seguirán para analizar si se respetó el Plan de Proyecto original a cargo del Ing. Federico Meghinasso:
 \begin{itemize}
-    \item Plazo: Se armara un tabla con las tareas y lo tiempos reales y previstos.
-    \item Especificaciones: Se compararan las especificaciones reales del proyecto final con las especificaciones planificadas. Si estas no coinciden se hará una revisión de porque no se cumplieron.
+    \item Plazo: Se armará un tabla con las tareas y lo tiempos reales y previstos.
+    \item Especificaciones: Se compararán las especificaciones reales del proyecto final con las especificaciones planificadas. Si estas no coinciden se hará una revisión de porque no se cumplieron.
 \end{itemize}
 \item Identificación de las técnicas y procedimientos útiles e inútiles que se utilizaron, y los problemas que surgieron y cómo se solucionaron, a cargo del Ing. Federico Meghinasso.
 \item El Ing. Federico Meghinasso reunirá a todos los colaboradores en la fábrica para agradecerles e invitarlos a un almuerzo a costa suya.
